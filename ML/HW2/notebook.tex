@@ -1,0 +1,1730 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{hw2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}The files is “hw2\PYZus{}data\PYZus{}1.txt”.  The data contains two X variables and one Y variable (two classes).}
+        \PY{c+c1}{\PYZsh{}Use rows 1\PYZhy{}70 as training data, and use the remaining rows as testing data.}
+        
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{sklearn} \PY{k}{as} \PY{n+nn}{sk}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{math} \PY{k}{as} \PY{n+nn}{math}
+        \PY{k+kn}{import} \PY{n+nn}{scipy} \PY{k}{as} \PY{n+nn}{sp}
+        \PY{k+kn}{from} \PY{n+nn}{functools} \PY{k}{import} \PY{n}{reduce}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{tree}
+        \PY{k+kn}{import} \PY{n+nn}{random} \PY{k}{as} \PY{n+nn}{nr}
+        \PY{k+kn}{import} \PY{n+nn}{itertools} \PY{k}{as} \PY{n+nn}{it}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        
+        \PY{k}{if} \PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} data path specification here}
+            \PY{c+c1}{\PYZsh{}use relative path here since the script is in the same directory as the data file}
+            \PY{n}{data1} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hw2\PYZus{}data\PYZus{}1.txt}\PY{l+s+s2}{\PYZdq{}}
+            
+        
+        
+            \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} load the data into pandas dataframe}
+            \PY{n}{total\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{data1}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}separator is always important; use \PYZdq{},\PYZdq{} for this small dataset}
+        
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{total\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} get a peek at what each column contains}
+            
+           
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+   Sepal.Length  Sepal.Width Species
+0           5.1          3.5  setosa
+1           4.9          3.0  setosa
+2           4.7          3.2  setosa
+3           4.6          3.1  setosa
+4           5.0          3.6  setosa
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:}     \PY{n+nb}{print}\PY{p}{(}\PY{n}{total\PYZus{}df}\PY{o}{.}\PY{n}{shape}\PY{p}{)} \PY{c+c1}{\PYZsh{} know the shape of the data}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{total\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{p}{)} \PY{c+c1}{\PYZsh{} get the list of column names}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{total\PYZus{}df}\PY{o}{.}\PY{n}{dtypes}\PY{p}{)} \PY{c+c1}{\PYZsh{} know the data types of each column (float, int, object(string) and etc.)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(100, 3)
+Index(['Sepal.Length', 'Sepal.Width', 'Species'], dtype='object')
+Sepal.Length    float64
+Sepal.Width     float64
+Species          object
+dtype: object
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{Y} \PY{o}{=} \PY{n}{total\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Species}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+        \PY{k}{def} \PY{n+nf}{lab}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{p}{:} 
+            \PY{k}{if}\PY{p}{(}\PY{n}{s} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{setosa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{l+m+mi}{1}\PY{p}{;}
+            \PY{k}{else}\PY{p}{:}\PY{k}{return} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{;}
+        \PY{n}{Y}\PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{n}{lab}\PY{p}{,}\PY{n}{total\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Species}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{Y}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Write a function of perceptron. Using initial weights of all “1”s,}
+         \PY{c+c1}{\PYZsh{}and a learning rate of 1, run the perception on the training data. }
+         \PY{c+c1}{\PYZsh{}Conduct prediction on the testing data, and report error rate. }
+         \PY{c+c1}{\PYZsh{}Please remember to add the column of 1’s in the predictors.}
+         \PY{c+c1}{\PYZsh{}step function for activation}
+         \PY{k}{def} \PY{n+nf}{step} \PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:} 
+             \PY{k}{if}\PY{p}{(}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)} \PY{p}{)}\PY{p}{:} \PY{k}{return} \PY{l+m+mi}{1}\PY{p}{;}
+             \PY{k}{else}\PY{p}{:} \PY{k}{return} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{;}
+         
+         
+         \PY{c+c1}{\PYZsh{}initalize weights, leanning rate, and threshold}
+         
+         \PY{n}{df} \PY{o}{=} \PY{n}{total\PYZus{}df}\PY{o}{.}\PY{n}{values}
+         \PY{n}{dfTr} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{70}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{dfTr}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{n}{lab}\PY{p}{,}\PY{n}{dfTr}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{dfTr}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[5.1 3.5 1]
+ [4.9 3.0 1]
+ [4.7 3.2 1]
+ [4.6 3.1 1]
+ [5.0 3.6 1]
+ [5.4 3.9 1]
+ [4.6 3.4 1]
+ [5.0 3.4 1]
+ [4.4 2.9 1]
+ [4.9 3.1 1]
+ [5.4 3.7 1]
+ [4.8 3.4 1]
+ [4.8 3.0 1]
+ [4.3 3.0 1]
+ [5.8 4.0 1]
+ [5.7 4.4 1]
+ [5.4 3.9 1]
+ [5.1 3.5 1]
+ [5.7 3.8 1]
+ [5.1 3.8 1]
+ [5.4 3.4 1]
+ [5.1 3.7 1]
+ [4.6 3.6 1]
+ [5.1 3.3 1]
+ [4.8 3.4 1]
+ [5.0 3.0 1]
+ [5.0 3.4 1]
+ [5.2 3.5 1]
+ [5.2 3.4 1]
+ [4.7 3.2 1]
+ [4.8 3.1 1]
+ [5.4 3.4 1]
+ [5.2 4.1 1]
+ [5.5 4.2 1]
+ [4.9 3.1 1]
+ [6.3 3.3 -1]
+ [5.8 2.7 -1]
+ [7.1 3.0 -1]
+ [6.3 2.9 -1]
+ [6.5 3.0 -1]
+ [7.6 3.0 -1]
+ [4.9 2.5 -1]
+ [7.3 2.9 -1]
+ [6.7 2.5 -1]
+ [7.2 3.6 -1]
+ [6.5 3.2 -1]
+ [6.4 2.7 -1]
+ [6.8 3.0 -1]
+ [5.7 2.5 -1]
+ [5.8 2.8 -1]
+ [6.4 3.2 -1]
+ [6.5 3.0 -1]
+ [7.7 3.8 -1]
+ [7.7 2.6 -1]
+ [6.0 2.2 -1]
+ [6.9 3.2 -1]
+ [5.6 2.8 -1]
+ [7.7 2.8 -1]
+ [6.3 2.7 -1]
+ [6.7 3.3 -1]
+ [7.2 3.2 -1]
+ [6.2 2.8 -1]
+ [6.1 3.0 -1]
+ [6.4 2.8 -1]
+ [7.2 3.0 -1]
+ [7.4 2.8 -1]
+ [7.9 3.8 -1]
+ [6.4 2.8 -1]
+ [6.3 2.8 -1]
+ [6.1 2.6 -1]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{perc}\PY{p}{(}\PY{n}{it}\PY{p}{,} \PY{n}{lr}\PY{p}{)}\PY{p}{:}
+             \PY{n}{stit} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{it}\PY{p}{)}\PY{p}{;}
+             \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}weight}
+         \PY{c+c1}{\PYZsh{} Apply Perceptron learning rule}
+             \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{it}\PY{p}{)} \PY{p}{:}  \PY{c+c1}{\PYZsh{}This is too help converge}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{70}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{}up to 70}
+                     \PY{n}{i} \PY{o}{=} \PY{n}{nr}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{70}\PY{p}{)}\PY{p}{;} \PY{c+c1}{\PYZsh{}thought that this would help}
+                 \PY{c+c1}{\PYZsh{}for the training set, calculate output}
+                     \PY{n}{y} \PY{o}{=} \PY{n}{step}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{o}{*}\PY{n}{w}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+                     \PY{c+c1}{\PYZsh{} print((Y[i], y))}
+                     \PY{c+c1}{\PYZsh{} Update weights}
+                     \PY{c+c1}{\PYZsh{}if both y are 0, then the update is w + 0}
+                     \PY{c+c1}{\PYZsh{}if both are 1, it is w+(1\PYZhy{}1)*...}
+                     \PY{c+c1}{\PYZsh{}else it is w +lr*(x), where x is a missclassified point}
+                     \PY{c+c1}{\PYZsh{}w is thus a linear combination of misclassified points like the lecture 8 slides say}
+                     \PY{n}{w} \PY{o}{=} \PY{n}{w} \PY{o}{+} \PY{n}{lr}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{Y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{)} \PY{p}{)}\PY{o}{*} \PY{n}{df}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+                    
+             \PY{c+c1}{\PYZsh{}now do prediction and errors }
+             \PY{n}{err} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{70}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)} \PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}print(w.transpose().dot(df[i, 0:2]));}
+                 \PY{n}{y} \PY{o}{=} \PY{n}{step}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{60}\PY{p}{)}\PY{p}{;}\PY{c+c1}{\PYZsh{}bias}
+                 \PY{n}{err} \PY{o}{+}\PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{Y}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{!=} \PY{n}{y}\PY{p}{)}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{For }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}\PY{n}{stit} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ iterates, the error is }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{err}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/30}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w is }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+             \PY{k}{return} \PY{n}{w}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{perc}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+For 3 iterates, the error is 12/30
+w is [[-25.200000000000017]
+ [75.80000000000003]]
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} array([[-25.200000000000017],
+                [75.80000000000003]], dtype=object)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{perc}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+For 5 iterates, the error is 9/30
+w is [[-27.2]
+ [79.99999999999999]]
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} array([[-27.2],
+                [79.99999999999999]], dtype=object)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{perc}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+For 10 iterates, the error is 7/30
+w is [[-36.20000000000001]
+ [94.80000000000003]]
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} array([[-36.20000000000001],
+                [94.80000000000003]], dtype=object)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{perc}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+For 20 iterates, the error is 8/30
+w is [[-40.39999999999998]
+ [105.0]]
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} array([[-40.39999999999998],
+                [105.0]], dtype=object)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{}this is the code for just one desicion stump}
+         \PY{c+c1}{\PYZsh{}input}
+         \PY{c+c1}{\PYZsh{}x is the variables and outcomes to train on}
+         \PY{c+c1}{\PYZsh{}w is the weight to give each sample}
+         \PY{c+c1}{\PYZsh{}output}
+         \PY{c+c1}{\PYZsh{} an array of the two best cuts for each var [dimension 0, dimension1]}
+         \PY{c+c1}{\PYZsh{}the preformance and the dimension that gave the best cut as [pref d1, pref d2]}
+         
+         \PY{k}{def} \PY{n+nf}{stump}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{w}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}x is data}
+             \PY{c+c1}{\PYZsh{}w is weight on data/correct answer}
+             \PY{c+c1}{\PYZsh{}both for rows and columns}
+             \PY{c+c1}{\PYZsh{}multiply w and y element wise}
+             \PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{multiply}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{w}\PY{p}{)}
+             \PY{n}{ext}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{inx} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{val} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} 
+         
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}sort samples in ascending order along dimension i}
+                 \PY{n}{x}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{c+c1}{\PYZsh{}print(i)}
+                 \PY{c+c1}{\PYZsh{}x[np.argsort(x[:, 1])]}
+                 \PY{c+c1}{\PYZsh{}x[x[:,i].argsort( axis=0, order=None)]}
+                 \PY{c+c1}{\PYZsh{}print(list(x))}
+                 \PY{c+c1}{\PYZsh{}as the y labels are +/\PYZhy{} 1, do a cumulative sum with the weight}
+                 \PY{c+c1}{\PYZsh{}the array should have each element map to the sum reduction of it\PYZsq{}s subsequence}
+                 \PY{n}{ex} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{it}\PY{o}{.}\PY{n}{accumulate}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}this max will be the most pure in terms of ones to the left of it}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{ex}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+                 \PY{n}{ind} \PY{o}{=} \PY{n}{ex}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{ex}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{ex1} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{n}{ind}\PY{p}{,}\PY{n}{i}\PY{p}{]}
+                 
+               
+                 \PY{k}{if} \PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{ex}\PY{p}{)}\PY{o}{\PYZgt{}} \PY{n}{val}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{val}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{ex}\PY{p}{)}
+                     \PY{n}{val}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{i}
+                     
+                 \PY{c+c1}{\PYZsh{}return the info needed to decide the class, ex for sign, ind for cut off, i to know if in x1 or x2 var}
+                 \PY{n}{ext}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{n}{ex1}
+                 \PY{n}{inx}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{n}{ind}
+                 
+             \PY{k}{return} \PY{p}{[}\PY{n}{ext}\PY{p}{,} \PY{n}{val}\PY{p}{]}
+                     
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{}adative boost}
+         \PY{c+c1}{\PYZsh{}input:}
+         \PY{c+c1}{\PYZsh{}n is the number of itterataes/ learnes to make}
+         \PY{c+c1}{\PYZsh{}X is the data with outcomes to train on}
+         \PY{k}{def} \PY{n+nf}{adab2}\PY{p}{(} \PY{n}{X}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}n initail weights for the n learners to have}
+             \PY{c+c1}{\PYZsh{}the weights are all initialized to be equal, 1/n}
+             \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{70}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{70}
+             \PY{c+c1}{\PYZsh{}the container for the learners}
+             \PY{n}{l} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{}the weight on each learner}
+             \PY{n}{lw} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+         
+             
+             \PY{c+c1}{\PYZsh{}for the number of epochs, train a classifier with the weight adjusting at each iteration}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}train a classifier on the weigthed data}
+                 \PY{n}{s} \PY{o}{=} \PY{n}{stump}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{w}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}this stump gives two lists: where to cut and the value of that cut, the index corresponds to the index of that }
+                 \PY{c+c1}{\PYZsh{}dimension}
+                 \PY{c+c1}{\PYZsh{}find out if the x1 or x2 cut is more valuable}
+                 \PY{n}{ind} \PY{o}{=} \PY{n}{s}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{s}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{s2} \PY{o}{=} \PY{p}{[}\PY{n}{ind}\PY{p}{,} \PY{n}{s}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{ind}\PY{p}{]} \PY{p}{]}
+                 
+                 \PY{c+c1}{\PYZsh{}then predict on x}
+                 \PY{n}{yp} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{h}\PY{p}{:}\PY{n}{step}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{h}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ind}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{s}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{ind}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{y} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}find the error of that classifier and use it for the updates}
+                 \PY{c+c1}{\PYZsh{}weighted sum error for misclassified points}
+                 \PY{n}{e} \PY{o}{=} \PY{n}{w}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{yp} \PY{o}{!=} \PY{n}{y}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}use that error to find the voting weight of this stump}
+                 \PY{n}{a} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{e}\PY{p}{)}\PY{o}{/}\PY{n}{e}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n}{lw}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{a}
+                 \PY{n}{l}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{s2}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}find the new weights of the samples}
+                 \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{w}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{n}{a} \PY{o}{*} \PY{n}{y} \PY{o}{*} \PY{n}{yp}\PY{p}{)}
+                 \PY{n}{w} \PY{o}{=} \PY{n}{w} \PY{o}{/} \PY{n}{w}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{lw} \PY{o}{=} \PY{n}{lw}\PY{o}{/}\PY{n}{lw}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         
+             \PY{k}{return} \PY{p}{[}\PY{n}{lw}\PY{p}{,}\PY{n}{l}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{}adative boost}
+         \PY{c+c1}{\PYZsh{}input:}
+         \PY{c+c1}{\PYZsh{}n is the number of itterataes/ learnes to make}
+         \PY{c+c1}{\PYZsh{}X is the data with outcomes to train on}
+         \PY{k}{def} \PY{n+nf}{adab}\PY{p}{(} \PY{n}{X}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}n initail weights for the n learners to have}
+             \PY{c+c1}{\PYZsh{}the weights are all initialized to be equal, 1/n}
+             \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{70}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{70}
+             \PY{c+c1}{\PYZsh{}the container for the learners}
+             \PY{n}{l} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{}the weight on each learner}
+             \PY{n}{lw} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+         
+             
+             \PY{c+c1}{\PYZsh{}for the number of epochs, train a classifier with the weight adjusting at each iteration}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}train a classifier on the weigthed data}
+                 \PY{n}{s} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{s}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{sample\PYZus{}weight}\PY{o}{=}\PY{n}{w}\PY{p}{)}
+                 \PY{n}{yp} \PY{o}{=} \PY{n}{s}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{y} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}find the error of that classifier and use it for the updates}
+                 \PY{c+c1}{\PYZsh{}weighted sum error for misclassified points}
+                 \PY{n}{e} \PY{o}{=} \PY{n}{w}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{yp} \PY{o}{!=} \PY{n}{y}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}use that error to find the voting weight of this stump}
+                 \PY{n}{a} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{e}\PY{p}{)}\PY{o}{/}\PY{n}{e}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n}{lw}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{a}
+                 \PY{n}{l}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}find the new weights of the samples}
+                 \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{w}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{n}{a} \PY{o}{*} \PY{n}{y} \PY{o}{*} \PY{n}{yp}\PY{p}{)}
+                 \PY{n}{w} \PY{o}{=} \PY{n}{w} \PY{o}{/} \PY{n}{w}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{lw} \PY{o}{=} \PY{n}{lw}\PY{o}{/}\PY{n}{lw}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         
+             \PY{k}{return} \PY{p}{[}\PY{n}{lw}\PY{p}{,}\PY{n}{l}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{}3}
+         \PY{c+c1}{\PYZsh{}predict and report error}
+         \PY{n}{t} \PY{o}{=} \PY{n}{adab}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{70}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}predict on the test set}
+         \PY{c+c1}{\PYZsh{} X input, y output}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{k}{for} \PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{w}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{t}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{y} \PY{o}{=} \PY{n}{y} \PY{o}{+} \PY{n}{w} \PY{o}{*} \PY{n}{s}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+m+mi}{70}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the prediction}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s confidence (abs) are }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{j}\PY{p}{:}\PY{n}{step}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{j}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{predicted class }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{list}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+         \PY{n}{yt} \PY{o}{=} \PY{n}{Y}\PY{p}{[}\PY{l+m+mi}{70}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{true class }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{yt}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}see where the values are not equal}
+         \PY{n}{e} \PY{o}{=} \PY{n}{reduce}\PY{p}{(}\PY{p}{(}\PY{k}{lambda} \PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{:} \PY{n}{i}\PY{o}{+}\PY{n}{j}\PY{p}{)}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{n}{x} \PY{o}{!=} \PY{n}{z}\PY{p}{)}\PY{p}{,}\PY{n}{y} \PY{p}{,} \PY{n}{yt}\PY{p}{)}\PY{p}{)} \PY{p}{)}\PY{o}{/}\PY{l+m+mi}{30}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{error rate is }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{e}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+the prediction's confidence (abs) are  [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -0.6348449080299385, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -0.6348449080299385]
+predicted class  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+true class  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+error rate is  0.0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{}5}
+         \PY{c+c1}{\PYZsh{}predict and report error}
+         \PY{n}{t} \PY{o}{=} \PY{n}{adab}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{70}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}predict on the test set}
+         \PY{c+c1}{\PYZsh{} X input, y output}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{k}{for} \PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{w}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{t}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{y} \PY{o}{=} \PY{n}{y} \PY{o}{+} \PY{n}{w} \PY{o}{*} \PY{n}{s}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+m+mi}{70}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the prediction}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s confidence (abs) are }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{j}\PY{p}{:}\PY{n}{step}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{j}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{predicted class }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{list}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{yt} \PY{o}{=} \PY{n}{Y}\PY{p}{[}\PY{l+m+mi}{70}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{true class }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{yt}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}see where the values are not equal}
+         \PY{n}{e} \PY{o}{=} \PY{n}{reduce}\PY{p}{(}\PY{p}{(}\PY{k}{lambda} \PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{:} \PY{n}{i}\PY{o}{+}\PY{n}{j}\PY{p}{)}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{n}{x} \PY{o}{!=} \PY{n}{z}\PY{p}{)}\PY{p}{,}\PY{n}{y} \PY{p}{,} \PY{n}{yt}\PY{p}{)}\PY{p}{)} \PY{p}{)}\PY{o}{/}\PY{l+m+mi}{30}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{error rate is }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{e}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+the prediction's confidence (abs) are  [0.45134848816932016, 0.45134848816932016, 0.45134848816932016, 0.45134848816932016, 0.45134848816932016, 0.45134848816932016, 0.45134848816932016, 0.45134848816932016, 0.45134848816932016, 0.45134848816932016, 0.45134848816932016, 0.45134848816932016, 0.45134848816932016, 0.45134848816932016, 0.45134848816932016, -0.45134848816932016, -0.45134848816932016, -0.45134848816932016, -0.45134848816932016, -0.45134848816932016, -0.45134848816932016, -0.45134848816932016, 0.22407604972873826, -0.45134848816932016, -0.45134848816932016, -0.45134848816932016, -0.45134848816932016, -0.45134848816932016, -0.45134848816932016, 0.22407604972873826] 
+
+predicted class  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, 1] 
+
+true class  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+error rate is  0.06666666666666667
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{}10, 20}
+         \PY{c+c1}{\PYZsh{}predict and report error}
+         \PY{n}{t} \PY{o}{=} \PY{n}{adab}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{70}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}predict on the test set}
+         \PY{c+c1}{\PYZsh{} X input, y output}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{k}{for} \PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{w}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{t}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{y} \PY{o}{=} \PY{n}{y} \PY{o}{+} \PY{n}{w} \PY{o}{*} \PY{n}{s}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+m+mi}{70}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the prediction}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s confidence (abs) are }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{j}\PY{p}{:}\PY{n}{step}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{j}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{predicted class }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{list}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{yt} \PY{o}{=} \PY{n}{Y}\PY{p}{[}\PY{l+m+mi}{70}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{true class }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{yt}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}see where the values are not equal}
+         \PY{n}{e} \PY{o}{=} \PY{n}{reduce}\PY{p}{(}\PY{p}{(}\PY{k}{lambda} \PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{:} \PY{n}{i}\PY{o}{+}\PY{n}{j}\PY{p}{)}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{n}{x} \PY{o}{!=} \PY{n}{z}\PY{p}{)}\PY{p}{,}\PY{n}{y} \PY{p}{,} \PY{n}{yt}\PY{p}{)}\PY{p}{)} \PY{p}{)}\PY{o}{/}\PY{l+m+mi}{30}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{error rate is }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{e}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+the prediction's confidence (abs) are  [0.16653450999474034, 0.16653450999474034, -0.08657114163958951, 0.6246200265953243, 0.16653450999474034, 0.16653450999474034, 0.6246200265953243, 0.6246200265953243, 0.16653450999474034, 0.16653450999474034, 0.6246200265953243, 0.16653450999474034, 0.6246200265953243, 0.16653450999474034, 0.16653450999474034, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, 0.16189269365757392, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, 0.16189269365757392] 
+
+predicted class  [1, 1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, 1] 
+
+true class  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+error rate is  0.1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{}20}
+         \PY{c+c1}{\PYZsh{}predict and report error}
+         \PY{n}{t} \PY{o}{=} \PY{n}{adab}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{70}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}predict on the test set}
+         \PY{c+c1}{\PYZsh{} X input, y output}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{k}{for} \PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{w}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{t}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{y} \PY{o}{=} \PY{n}{y} \PY{o}{+} \PY{n}{w} \PY{o}{*} \PY{n}{s}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+m+mi}{70}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the prediction}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s confidence (abs) are }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{j}\PY{p}{:}\PY{n}{step}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{j}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{predicted class }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{list}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{yt} \PY{o}{=} \PY{n}{Y}\PY{p}{[}\PY{l+m+mi}{70}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{true class }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{yt}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}see where the values are not equal}
+         \PY{n}{e} \PY{o}{=} \PY{n}{reduce}\PY{p}{(}\PY{p}{(}\PY{k}{lambda} \PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{:} \PY{n}{i}\PY{o}{+}\PY{n}{j}\PY{p}{)}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{n}{x} \PY{o}{!=} \PY{n}{z}\PY{p}{)}\PY{p}{,}\PY{n}{y} \PY{p}{,} \PY{n}{yt}\PY{p}{)}\PY{p}{)} \PY{p}{)}\PY{o}{/}\PY{l+m+mi}{30}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{error rate is }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{e}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+the prediction's confidence (abs) are  [0.17691745173094958, 0.17691745173094958, -0.11769271071829987, 0.34740210853384673, 0.17691745173094958, 0.17691745173094958, 0.34740210853384673, 0.34740210853384673, 0.17691745173094958, 0.17691745173094958, 0.34740210853384673, 0.17691745173094958, 0.34740210853384673, 0.17691745173094958, 0.17691745173094958, -0.5572407846287333, -0.5572407846287333, -0.5572407846287333, -0.5572407846287333, -0.5572407846287333, -0.5572407846287333, -0.5572407846287333, 0.12825345084393705, -0.5572407846287333, -0.5572407846287333, -0.5572407846287333, -0.5572407846287333, -0.5572407846287333, -0.5572407846287333, 0.12825345084393705] 
+
+predicted class  [1, 1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, 1] 
+
+true class  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+error rate is  0.1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{}1}
+         \PY{c+c1}{\PYZsh{}predict and report error}
+         \PY{n}{t} \PY{o}{=} \PY{n}{adab}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{70}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}predict on the test set}
+         \PY{c+c1}{\PYZsh{} X input, y output}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{k}{for} \PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{w}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{t}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{y} \PY{o}{=} \PY{n}{y} \PY{o}{+} \PY{n}{w} \PY{o}{*} \PY{n}{s}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+m+mi}{70}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the prediction}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s confidence (abs) are }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{j}\PY{p}{:}\PY{n}{step}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{j}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{predicted class }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n+nb}{list}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{yt} \PY{o}{=} \PY{n}{Y}\PY{p}{[}\PY{l+m+mi}{70}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{true class }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{yt}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}see where the values are not equal}
+         \PY{n}{e} \PY{o}{=} \PY{n}{reduce}\PY{p}{(}\PY{p}{(}\PY{k}{lambda} \PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{:} \PY{n}{i}\PY{o}{+}\PY{n}{j}\PY{p}{)}\PY{p}{,} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{n}{x} \PY{o}{!=} \PY{n}{z}\PY{p}{)}\PY{p}{,}\PY{n}{y} \PY{p}{,} \PY{n}{yt}\PY{p}{)}\PY{p}{)} \PY{p}{)}\PY{o}{/}\PY{l+m+mi}{30}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{error rate is }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{e}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+the prediction's confidence (abs) are  [0.16653450999474034, 0.16653450999474034, -0.08657114163958951, 0.6246200265953243, 0.16653450999474034, 0.16653450999474034, 0.6246200265953243, 0.6246200265953243, 0.16653450999474034, 0.16653450999474034, 0.6246200265953243, 0.16653450999474034, 0.6246200265953243, 0.16653450999474034, 0.16653450999474034, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, 0.16189269365757392, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, -0.6246200265953243, 0.16189269365757392] 
+
+predicted class  [1, 1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, -1, -1, -1, 1] 
+
+true class  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+error rate is  0.1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}then for part 2, load data 2}
+         \PY{n}{data2} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hw2\PYZus{}data\PYZus{}2.txt}\PY{l+s+s2}{\PYZdq{}}
+             
+         
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} load the data into pandas dataframe}
+         \PY{n}{total\PYZus{}df2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{data2}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}separator is always important; use \PYZdq{},\PYZdq{} for this small dataset}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{total\PYZus{}df2}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} get a peek at what each column contains}
+             
+            
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     X1    X2    X3     X4    X5     X6    X7    X8    X9   X10  {\ldots}    X17  \textbackslash{}
+0  2.13  3.76  4.93  2.030  6.37  1.260  8.45  2.58  6.57  2.65  {\ldots}  1.310   
+1  3.40  3.33  4.19  0.816  6.80  0.236  7.45  4.33  4.66  1.57  {\ldots}  2.580   
+2  1.17  4.30  4.25  1.640  4.68 -2.100  6.40  4.04  4.11  3.03  {\ldots}  2.850   
+3  2.63  2.97  5.79  1.140  5.14 -0.351  6.89  4.69  5.31  3.50  {\ldots}  2.330   
+4  3.49  1.11  4.99  0.232  4.99 -0.486  8.65  4.45  6.04  2.25  {\ldots}  0.931   
+
+    X18   X19   X20   X21   X22   X23   X24   X25  y  
+0  2.77  3.97  7.36  4.99  6.97  5.89  7.04  6.04  1  
+1  3.66  4.46  6.19  3.58  7.71  6.38  7.22  4.41  1  
+2  4.09  3.77  5.91  4.37  7.66  6.45  7.28  5.14  1  
+3  3.38  4.27  6.36  5.70  7.76  3.59  7.34  5.86  1  
+4  4.39  4.91  7.72  6.71  5.74  7.08  8.15  3.00  0  
+
+[5 rows x 26 columns]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{total\PYZus{}df2}\PY{o}{.}\PY{n}{shape}\PY{p}{)} \PY{c+c1}{\PYZsh{} know the shape of the data}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{total\PYZus{}df2}\PY{o}{.}\PY{n}{columns}\PY{p}{)} \PY{c+c1}{\PYZsh{} get the list of column names}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{total\PYZus{}df2}\PY{o}{.}\PY{n}{dtypes}\PY{p}{)} \PY{c+c1}{\PYZsh{} know the data types of each column (float, int, object(string) and etc.)}
+         
+         \PY{n}{df2} \PY{o}{=} \PY{n}{total\PYZus{}df2}\PY{o}{.}\PY{n}{values}
+         \PY{n}{X} \PY{o}{=} \PY{n}{df2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{600}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{25}\PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{df2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{600}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{]}
+         
+         \PY{n}{tX} \PY{o}{=} \PY{n}{df2}\PY{p}{[}\PY{l+m+mi}{600}\PY{p}{:}\PY{l+m+mi}{800}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{25}\PY{p}{]}
+         \PY{n}{ty} \PY{o}{=} \PY{n}{df2}\PY{p}{[}\PY{l+m+mi}{600}\PY{p}{:}\PY{l+m+mi}{800}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}test error to rank preformance}
+         \PY{n}{te} \PY{o}{=} \PY{p}{[} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{ln} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{radial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sigmoid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{polynomial}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rand forest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(800, 26)
+Index(['X1', 'X2', 'X3', 'X4', 'X5', 'X6', 'X7', 'X8', 'X9', 'X10', 'X11',
+       'X12', 'X13', 'X14', 'X15', 'X16', 'X17', 'X18', 'X19', 'X20', 'X21',
+       'X22', 'X23', 'X24', 'X25', 'y'],
+      dtype='object')
+X1     float64
+X2     float64
+X3     float64
+X4     float64
+X5     float64
+X6     float64
+X7     float64
+X8     float64
+X9     float64
+X10    float64
+X11    float64
+X12    float64
+X13    float64
+X14    float64
+X15    float64
+X16    float64
+X17    float64
+X18    float64
+X19    float64
+X20    float64
+X21    float64
+X22    float64
+X23    float64
+X24    float64
+X25    float64
+y        int64
+dtype: object
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{}question 3}
+         \PY{c+c1}{\PYZsh{}Run Support Vector Machine with three different kernels: Radial, polynomial, and sigmoid. }
+         \PY{c+c1}{\PYZsh{}Keep every other parameter default, except the following:}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{svm}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{GridSearchCV}
+         \PY{c+c1}{\PYZsh{}For radial kernel, run a grid search for the best gamma parameter.}
+         \PY{c+c1}{\PYZsh{}radial svm}
+         \PY{c+c1}{\PYZsh{} Create a SVC classifier using an RBF kernel}
+         \PY{c+c1}{\PYZsh{}range of gamma to search}
+         \PY{n}{g} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}training with 10 fold cv}
+         \PY{n}{param\PYZus{}grid} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gamma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{g}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kernel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+         \PY{n}{rsvm} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{svm}\PY{o}{.}\PY{n}{SVC}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{param\PYZus{}grid}\PY{o}{=}\PY{n}{param\PYZus{}grid}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{rsvm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Plot the cross\PYZhy{}validation error rate v.s. gamma parameters.}
+         \PY{n}{res} \PY{o}{=} \PY{n}{rsvm}\PY{o}{.}\PY{n}{cv\PYZus{}results\PYZus{}}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{res}\PY{p}{)}
+         \PY{n}{re} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n+nb}{float}\PY{p}{(}\PY{l+m+mf}{1.0} \PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{res}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean\PYZus{}test\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{rg} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{13}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}}
+         \PY{n}{tg} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{float}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{res}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{param\PYZus{}gamma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plot} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{rg}\PY{p}{,}\PY{n}{re}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the error rate for the gamma }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{tg}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{re}\PY{p}{)}
+         
+         
+          
+         \PY{c+c1}{\PYZsh{}Fit the final model using the selected gamma, and conduct prediction on the testing data. }
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the best is }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{rsvm}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}\PY{p}{)}
+         \PY{n}{pred} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{rsvm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{tX}\PY{p}{,}\PY{n}{ty}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Report testing error rate. }
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{radial\PYZhy{}10cv has a test error rate of }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pred}\PY{p}{)}
+         \PY{n}{te}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{pred}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/dist-packages/sklearn/model\_selection/\_search.py:841: DeprecationWarning: The default of the `iid` parameter will change from True to False in version 0.22 and will be removed in 0.24. This will change numeric results when test-set sizes are unequal.
+  DeprecationWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'mean\_fit\_time': array([0.02497771, 0.02248666, 0.02247927, 0.02305975, 0.02205021,
+       0.02211342, 0.0217042 , 0.01404774, 0.02428908, 0.02531197,
+       0.02671938, 0.01849201, 0.01865923]), 'std\_fit\_time': array([4.00167247e-03, 4.19050675e-04, 8.27527839e-04, 1.57719855e-03,
+       5.60791769e-05, 1.12000827e-04, 1.65474279e-03, 2.97041635e-04,
+       1.61940624e-04, 1.17288200e-04, 9.41153588e-04, 4.01609639e-05,
+       4.45286016e-04]), 'mean\_score\_time': array([0.00259125, 0.00232606, 0.00232992, 0.00247629, 0.00229366,
+       0.00229959, 0.00232782, 0.00148311, 0.00219636, 0.002333  ,
+       0.00270193, 0.00194495, 0.00199201]), 'std\_score\_time': array([3.51832565e-04, 6.91221309e-05, 8.15160200e-05, 2.77278082e-04,
+       3.62539028e-05, 5.48136499e-05, 1.68071611e-04, 2.92678981e-05,
+       7.07589069e-05, 3.31403626e-05, 2.18006096e-04, 2.12090848e-05,
+       1.39278594e-04]), 'param\_gamma': masked\_array(data=[1e-09, 1e-08, 1e-07, 1e-06, 1e-05, 0.0001, 0.001, 0.01,
+                   0.1, 1.0, 10.0, 100.0, 1000.0],
+             mask=[False, False, False, False, False, False, False, False,
+                   False, False, False, False, False],
+       fill\_value='?',
+            dtype=object), 'param\_kernel': masked\_array(data=['rbf', 'rbf', 'rbf', 'rbf', 'rbf', 'rbf', 'rbf', 'rbf',
+                   'rbf', 'rbf', 'rbf', 'rbf', 'rbf'],
+             mask=[False, False, False, False, False, False, False, False,
+                   False, False, False, False, False],
+       fill\_value='?',
+            dtype=object), 'params': [\{'gamma': 1e-09, 'kernel': 'rbf'\}, \{'gamma': 1e-08, 'kernel': 'rbf'\}, \{'gamma': 1e-07, 'kernel': 'rbf'\}, \{'gamma': 1e-06, 'kernel': 'rbf'\}, \{'gamma': 1e-05, 'kernel': 'rbf'\}, \{'gamma': 0.0001, 'kernel': 'rbf'\}, \{'gamma': 0.001, 'kernel': 'rbf'\}, \{'gamma': 0.01, 'kernel': 'rbf'\}, \{'gamma': 0.1, 'kernel': 'rbf'\}, \{'gamma': 1.0, 'kernel': 'rbf'\}, \{'gamma': 10.0, 'kernel': 'rbf'\}, \{'gamma': 100.0, 'kernel': 'rbf'\}, \{'gamma': 1000.0, 'kernel': 'rbf'\}], 'split0\_test\_score': array([0.50819672, 0.50819672, 0.50819672, 0.50819672, 0.50819672,
+       0.50819672, 0.95081967, 0.98360656, 0.90163934, 0.50819672,
+       0.50819672, 0.50819672, 0.50819672]), 'split1\_test\_score': array([0.50819672, 0.50819672, 0.50819672, 0.50819672, 0.50819672,
+       0.50819672, 0.90163934, 0.83606557, 0.83606557, 0.50819672,
+       0.50819672, 0.50819672, 0.50819672]), 'split2\_test\_score': array([0.50819672, 0.50819672, 0.50819672, 0.50819672, 0.50819672,
+       0.50819672, 0.8852459 , 0.8852459 , 0.83606557, 0.50819672,
+       0.50819672, 0.50819672, 0.50819672]), 'split3\_test\_score': array([0.5       , 0.5       , 0.5       , 0.5       , 0.5       ,
+       0.5       , 0.9       , 0.88333333, 0.86666667, 0.5       ,
+       0.5       , 0.5       , 0.5       ]), 'split4\_test\_score': array([0.5       , 0.5       , 0.5       , 0.5       , 0.5       ,
+       0.5       , 0.86666667, 0.96666667, 0.88333333, 0.5       ,
+       0.5       , 0.5       , 0.5       ]), 'split5\_test\_score': array([0.5       , 0.5       , 0.5       , 0.5       , 0.5       ,
+       0.5       , 0.86666667, 0.95      , 0.91666667, 0.5       ,
+       0.5       , 0.5       , 0.5       ]), 'split6\_test\_score': array([0.5       , 0.5       , 0.5       , 0.5       , 0.5       ,
+       0.5       , 0.91666667, 0.93333333, 0.91666667, 0.5       ,
+       0.5       , 0.5       , 0.5       ]), 'split7\_test\_score': array([0.50847458, 0.50847458, 0.50847458, 0.50847458, 0.50847458,
+       0.50847458, 0.88135593, 0.89830508, 0.93220339, 0.50847458,
+       0.50847458, 0.50847458, 0.50847458]), 'split8\_test\_score': array([0.50847458, 0.50847458, 0.50847458, 0.50847458, 0.50847458,
+       0.50847458, 0.89830508, 0.93220339, 0.88135593, 0.50847458,
+       0.50847458, 0.50847458, 0.50847458]), 'split9\_test\_score': array([0.50847458, 0.50847458, 0.50847458, 0.50847458, 0.50847458,
+       0.50847458, 0.91525424, 0.89830508, 0.91525424, 0.50847458,
+       0.50847458, 0.50847458, 0.50847458]), 'mean\_test\_score': array([0.505     , 0.505     , 0.505     , 0.505     , 0.505     ,
+       0.505     , 0.89833333, 0.91666667, 0.88833333, 0.505     ,
+       0.505     , 0.505     , 0.505     ]), 'std\_test\_score': array([0.0040839 , 0.0040839 , 0.0040839 , 0.0040839 , 0.0040839 ,
+       0.0040839 , 0.02428044, 0.04250245, 0.03238508, 0.0040839 ,
+       0.0040839 , 0.0040839 , 0.0040839 ]), 'rank\_test\_score': array([4, 4, 4, 4, 4, 4, 2, 1, 3, 4, 4, 4, 4], dtype=int32), 'split0\_train\_score': array([0.50463822, 0.50463822, 0.50463822, 0.50463822, 0.50463822,
+       0.50463822, 0.92022263, 0.9554731 , 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split1\_train\_score': array([0.50463822, 0.50463822, 0.50463822, 0.50463822, 0.50463822,
+       0.50463822, 0.93692022, 0.95361781, 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split2\_train\_score': array([0.50463822, 0.50463822, 0.50463822, 0.50463822, 0.50463822,
+       0.50463822, 0.92207792, 0.95918367, 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split3\_train\_score': array([0.50555556, 0.50555556, 0.50555556, 0.50555556, 0.50555556,
+       0.50555556, 0.91851852, 0.94814815, 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split4\_train\_score': array([0.50555556, 0.50555556, 0.50555556, 0.50555556, 0.50555556,
+       0.50555556, 0.93333333, 0.9537037 , 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split5\_train\_score': array([0.50555556, 0.50555556, 0.50555556, 0.50555556, 0.50555556,
+       0.50555556, 0.92962963, 0.95740741, 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split6\_train\_score': array([0.50555556, 0.50555556, 0.50555556, 0.50555556, 0.50555556,
+       0.50555556, 0.92222222, 0.9537037 , 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split7\_train\_score': array([0.50462107, 0.50462107, 0.50462107, 0.50462107, 0.50462107,
+       0.50462107, 0.93530499, 0.95563771, 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split8\_train\_score': array([0.50462107, 0.50462107, 0.50462107, 0.50462107, 0.50462107,
+       0.50462107, 0.9168207 , 0.95194085, 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split9\_train\_score': array([0.50462107, 0.50462107, 0.50462107, 0.50462107, 0.50462107,
+       0.50462107, 0.93160813, 0.96118299, 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'mean\_train\_score': array([0.50500001, 0.50500001, 0.50500001, 0.50500001, 0.50500001,
+       0.50500001, 0.92666583, 0.95499991, 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'std\_train\_score': array([0.00045365, 0.00045365, 0.00045365, 0.00045365, 0.00045365,
+       0.00045365, 0.00709273, 0.00351761, 0.        , 0.        ,
+       0.        , 0.        , 0.        ])\}
+the error rate for the gamma  [1e-09, 1e-08, 1e-07, 1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000.0] is:  [0.495, 0.495, 0.495, 0.495, 0.495, 0.495, 0.10166666666666668, 0.08333333333333337, 0.11166666666666669, 0.495, 0.495, 0.495, 0.495]
+the best is  \{'gamma': 0.01, 'kernel': 'rbf'\}
+radial-10cv has a test error rate of  0.07999999999999996
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{}For sigmoid kernel, conduct the same procedure as for the radial kernel. }
+         \PY{c+c1}{\PYZsh{}Use 10\PYZhy{}fold cross\PYZhy{}validation to select the best gamma parameter. }
+         \PY{c+c1}{\PYZsh{}Plot the cross\PYZhy{}validation error rate v.s. gamma parameters. }
+         \PY{c+c1}{\PYZsh{}Fit the final model using the selected gamma, and conduct prediction on the testing data. }
+         \PY{c+c1}{\PYZsh{}Report testing error rate. }
+         
+         
+         
+         \PY{n}{g} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}training with 10 fold cv}
+         \PY{n}{param\PYZus{}grid} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gamma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{g}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kernel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sigmoid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+         \PY{n}{rsvm} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{svm}\PY{o}{.}\PY{n}{SVC}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{param\PYZus{}grid}\PY{o}{=}\PY{n}{param\PYZus{}grid}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{rsvm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Plot the cross\PYZhy{}validation error rate v.s. gamma parameters.}
+         \PY{n}{res} \PY{o}{=} \PY{n}{rsvm}\PY{o}{.}\PY{n}{cv\PYZus{}results\PYZus{}}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{res}\PY{p}{)}
+         \PY{n}{re} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n+nb}{float}\PY{p}{(}\PY{l+m+mf}{1.0} \PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{res}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean\PYZus{}test\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{rg} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{13}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}}
+         \PY{n}{tg} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{float}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{res}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{param\PYZus{}gamma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plot} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{rg}\PY{p}{,}\PY{n}{re}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the error rate for the gamma }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{tg}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{re}\PY{p}{)}
+         
+         
+          
+         \PY{c+c1}{\PYZsh{}Fit the final model using the selected gamma, and conduct prediction on the testing data. }
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the best is }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{rsvm}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}\PY{p}{)}
+         \PY{n}{pred} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{rsvm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{tX}\PY{p}{,}\PY{n}{ty}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Report testing error rate. }
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sigmoid\PYZhy{}10cv has a test error rate of }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pred}\PY{p}{)}
+         \PY{n}{te}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{pred}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'mean\_fit\_time': array([0.02184739, 0.02049401, 0.02039363, 0.02057948, 0.02065523,
+       0.02035496, 0.02538843, 0.02558558, 0.01210611, 0.0124285 ,
+       0.01201367, 0.01208632, 0.01210067]), 'std\_fit\_time': array([1.24109779e-03, 3.18065709e-04, 8.81599855e-05, 3.98483361e-04,
+       7.73741369e-04, 9.92707197e-05, 1.29686374e-04, 2.21270966e-04,
+       3.93240423e-05, 5.81336452e-04, 1.80030594e-04, 5.64815627e-05,
+       3.84722860e-05]), 'mean\_score\_time': array([0.0025548 , 0.00226765, 0.00227585, 0.00228786, 0.00227704,
+       0.0022589 , 0.00279534, 0.00284441, 0.00143816, 0.00151136,
+       0.00145512, 0.001443  , 0.00147874]), 'std\_score\_time': array([3.20722268e-04, 5.05387555e-05, 6.54272190e-05, 6.62370410e-05,
+       4.91865330e-05, 2.42426680e-05, 6.53039978e-05, 2.76421744e-05,
+       1.90103350e-05, 8.26473422e-05, 5.28527046e-05, 2.10549930e-05,
+       1.22874610e-04]), 'param\_gamma': masked\_array(data=[1e-09, 1e-08, 1e-07, 1e-06, 1e-05, 0.0001, 0.001, 0.01,
+                   0.1, 1.0, 10.0, 100.0, 1000.0],
+             mask=[False, False, False, False, False, False, False, False,
+                   False, False, False, False, False],
+       fill\_value='?',
+            dtype=object), 'param\_kernel': masked\_array(data=['sigmoid', 'sigmoid', 'sigmoid', 'sigmoid', 'sigmoid',
+                   'sigmoid', 'sigmoid', 'sigmoid', 'sigmoid', 'sigmoid',
+                   'sigmoid', 'sigmoid', 'sigmoid'],
+             mask=[False, False, False, False, False, False, False, False,
+                   False, False, False, False, False],
+       fill\_value='?',
+            dtype=object), 'params': [\{'gamma': 1e-09, 'kernel': 'sigmoid'\}, \{'gamma': 1e-08, 'kernel': 'sigmoid'\}, \{'gamma': 1e-07, 'kernel': 'sigmoid'\}, \{'gamma': 1e-06, 'kernel': 'sigmoid'\}, \{'gamma': 1e-05, 'kernel': 'sigmoid'\}, \{'gamma': 0.0001, 'kernel': 'sigmoid'\}, \{'gamma': 0.001, 'kernel': 'sigmoid'\}, \{'gamma': 0.01, 'kernel': 'sigmoid'\}, \{'gamma': 0.1, 'kernel': 'sigmoid'\}, \{'gamma': 1.0, 'kernel': 'sigmoid'\}, \{'gamma': 10.0, 'kernel': 'sigmoid'\}, \{'gamma': 100.0, 'kernel': 'sigmoid'\}, \{'gamma': 1000.0, 'kernel': 'sigmoid'\}], 'split0\_test\_score': array([0.50819672, 0.50819672, 0.50819672, 0.50819672, 0.50819672,
+       0.50819672, 0.6557377 , 0.50819672, 0.50819672, 0.50819672,
+       0.50819672, 0.50819672, 0.50819672]), 'split1\_test\_score': array([0.50819672, 0.50819672, 0.50819672, 0.50819672, 0.50819672,
+       0.50819672, 0.62295082, 0.50819672, 0.50819672, 0.50819672,
+       0.50819672, 0.50819672, 0.50819672]), 'split2\_test\_score': array([0.50819672, 0.50819672, 0.50819672, 0.50819672, 0.50819672,
+       0.50819672, 0.57377049, 0.50819672, 0.50819672, 0.50819672,
+       0.50819672, 0.50819672, 0.50819672]), 'split3\_test\_score': array([0.5 , 0.5 , 0.5 , 0.5 , 0.5 , 0.5 , 0.55, 0.5 , 0.5 , 0.5 , 0.5 ,
+       0.5 , 0.5 ]), 'split4\_test\_score': array([0.5       , 0.5       , 0.5       , 0.5       , 0.5       ,
+       0.5       , 0.53333333, 0.5       , 0.5       , 0.5       ,
+       0.5       , 0.5       , 0.5       ]), 'split5\_test\_score': array([0.5       , 0.5       , 0.5       , 0.5       , 0.5       ,
+       0.5       , 0.53333333, 0.5       , 0.5       , 0.5       ,
+       0.5       , 0.5       , 0.5       ]), 'split6\_test\_score': array([0.5       , 0.5       , 0.5       , 0.5       , 0.5       ,
+       0.5       , 0.51666667, 0.5       , 0.5       , 0.5       ,
+       0.5       , 0.5       , 0.5       ]), 'split7\_test\_score': array([0.50847458, 0.50847458, 0.50847458, 0.50847458, 0.50847458,
+       0.50847458, 0.62711864, 0.50847458, 0.50847458, 0.50847458,
+       0.50847458, 0.50847458, 0.50847458]), 'split8\_test\_score': array([0.50847458, 0.50847458, 0.50847458, 0.50847458, 0.50847458,
+       0.50847458, 0.57627119, 0.50847458, 0.50847458, 0.50847458,
+       0.50847458, 0.50847458, 0.50847458]), 'split9\_test\_score': array([0.50847458, 0.50847458, 0.50847458, 0.50847458, 0.50847458,
+       0.50847458, 0.57627119, 0.50847458, 0.50847458, 0.50847458,
+       0.50847458, 0.50847458, 0.50847458]), 'mean\_test\_score': array([0.505     , 0.505     , 0.505     , 0.505     , 0.505     ,
+       0.505     , 0.57666667, 0.505     , 0.505     , 0.505     ,
+       0.505     , 0.505     , 0.505     ]), 'std\_test\_score': array([0.0040839 , 0.0040839 , 0.0040839 , 0.0040839 , 0.0040839 ,
+       0.0040839 , 0.04371823, 0.0040839 , 0.0040839 , 0.0040839 ,
+       0.0040839 , 0.0040839 , 0.0040839 ]), 'rank\_test\_score': array([2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2], dtype=int32), 'split0\_train\_score': array([0.50463822, 0.50463822, 0.50463822, 0.50463822, 0.50463822,
+       0.50463822, 0.58627087, 0.50463822, 0.50463822, 0.50463822,
+       0.50463822, 0.50463822, 0.50463822]), 'split1\_train\_score': array([0.50463822, 0.50463822, 0.50463822, 0.50463822, 0.50463822,
+       0.50463822, 0.60853432, 0.50463822, 0.50463822, 0.50463822,
+       0.50463822, 0.50463822, 0.50463822]), 'split2\_train\_score': array([0.50463822, 0.50463822, 0.50463822, 0.50463822, 0.50463822,
+       0.50463822, 0.567718  , 0.50463822, 0.50463822, 0.50463822,
+       0.50463822, 0.50463822, 0.50463822]), 'split3\_train\_score': array([0.50555556, 0.50555556, 0.50555556, 0.50555556, 0.50555556,
+       0.50555556, 0.56851852, 0.50555556, 0.50555556, 0.50555556,
+       0.50555556, 0.50555556, 0.50555556]), 'split4\_train\_score': array([0.50555556, 0.50555556, 0.50555556, 0.50555556, 0.50555556,
+       0.50555556, 0.58148148, 0.50555556, 0.50555556, 0.50555556,
+       0.50555556, 0.50555556, 0.50555556]), 'split5\_train\_score': array([0.50555556, 0.50555556, 0.50555556, 0.50555556, 0.50555556,
+       0.50555556, 0.58148148, 0.50555556, 0.50555556, 0.50555556,
+       0.50555556, 0.50555556, 0.50555556]), 'split6\_train\_score': array([0.50555556, 0.50555556, 0.50555556, 0.50555556, 0.50555556,
+       0.50555556, 0.60925926, 0.50555556, 0.50555556, 0.50555556,
+       0.50555556, 0.50555556, 0.50555556]), 'split7\_train\_score': array([0.50462107, 0.50462107, 0.50462107, 0.50462107, 0.50462107,
+       0.50462107, 0.60813309, 0.50462107, 0.50462107, 0.50462107,
+       0.50462107, 0.50462107, 0.50462107]), 'split8\_train\_score': array([0.50462107, 0.50462107, 0.50462107, 0.50462107, 0.50462107,
+       0.50462107, 0.60628466, 0.50462107, 0.50462107, 0.50462107,
+       0.50462107, 0.50462107, 0.50462107]), 'split9\_train\_score': array([0.50462107, 0.50462107, 0.50462107, 0.50462107, 0.50462107,
+       0.50462107, 0.58595194, 0.50462107, 0.50462107, 0.50462107,
+       0.50462107, 0.50462107, 0.50462107]), 'mean\_train\_score': array([0.50500001, 0.50500001, 0.50500001, 0.50500001, 0.50500001,
+       0.50500001, 0.59036336, 0.50500001, 0.50500001, 0.50500001,
+       0.50500001, 0.50500001, 0.50500001]), 'std\_train\_score': array([0.00045365, 0.00045365, 0.00045365, 0.00045365, 0.00045365,
+       0.00045365, 0.01562205, 0.00045365, 0.00045365, 0.00045365,
+       0.00045365, 0.00045365, 0.00045365])\}
+the error rate for the gamma  [1e-09, 1e-08, 1e-07, 1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1, 1.0, 10.0, 100.0, 1000.0] is:  [0.495, 0.495, 0.495, 0.495, 0.495, 0.495, 0.42333333333333334, 0.495, 0.495, 0.495, 0.495, 0.495, 0.495]
+the best is  \{'gamma': 0.001, 'kernel': 'sigmoid'\}
+sigmoid-10cv has a test error rate of  0.385
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}For the polynomial kernel, }
+         \PY{c+c1}{\PYZsh{}tune the degree parameter using 10 fold cross validation. }
+         \PY{c+c1}{\PYZsh{}Plot the cross\PYZhy{}validation error rate v.s. degree parameters. }
+         \PY{c+c1}{\PYZsh{}Fit the final model using the selected degree, and conduct prediction on the testing data. }
+         \PY{c+c1}{\PYZsh{}Report testing error rate. }
+         
+         
+         
+         \PY{n}{g} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{13}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}training with 10 fold cv}
+         \PY{n}{param\PYZus{}grid} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{degree}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{g}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kernel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poly}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+         \PY{n}{rsvm} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{svm}\PY{o}{.}\PY{n}{SVC}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{param\PYZus{}grid}\PY{o}{=}\PY{n}{param\PYZus{}grid}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{rsvm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Plot the cross\PYZhy{}validation error rate v.s. gamma parameters.}
+         \PY{n}{res} \PY{o}{=} \PY{n}{rsvm}\PY{o}{.}\PY{n}{cv\PYZus{}results\PYZus{}}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{res}\PY{p}{)}
+         \PY{n}{re} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n+nb}{float}\PY{p}{(}\PY{l+m+mf}{1.0} \PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{res}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean\PYZus{}test\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{rg} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{13}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}}
+         \PY{n}{plot} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{rg}\PY{p}{,}\PY{n}{re}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the error rate for the degree }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{g}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{re}\PY{p}{)}
+         
+         
+          
+         \PY{c+c1}{\PYZsh{}Fit the final model using the selected gamma, and conduct prediction on the testing data. }
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the best is }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{rsvm}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}\PY{p}{)}
+         \PY{n}{pred} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{rsvm}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{tX}\PY{p}{,}\PY{n}{ty}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Report testing error rate. }
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poly\PYZhy{}10cv has a test error rate of }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pred}\PY{p}{)}
+         \PY{n}{te}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{pred}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'mean\_fit\_time': array([0.01291113, 0.00767145, 0.01601577, 0.02798727, 0.01992438,
+       0.01786034, 0.01683226, 0.01517081, 0.01388986, 0.01309428,
+       0.01292491, 0.0135159 , 0.0122787 ]), 'std\_fit\_time': array([0.00074381, 0.00027517, 0.00105193, 0.00341477, 0.00125348,
+       0.00084731, 0.00140471, 0.00093557, 0.00087198, 0.00084281,
+       0.00109664, 0.00114951, 0.00094636]), 'mean\_score\_time': array([0.00163679, 0.00080621, 0.00059686, 0.0007921 , 0.0006182 ,
+       0.0006578 , 0.00068369, 0.00069292, 0.00066977, 0.00071619,
+       0.00069156, 0.00080874, 0.00075104]), 'std\_score\_time': array([1.98194134e-04, 2.47136125e-05, 6.98637389e-05, 1.50179977e-04,
+       6.09417150e-05, 8.22792845e-05, 6.17188480e-05, 7.81027424e-05,
+       6.93992050e-05, 1.64068450e-04, 6.37084780e-05, 1.04474872e-04,
+       1.25475621e-04]), 'param\_degree': masked\_array(data=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+             mask=[False, False, False, False, False, False, False, False,
+                   False, False, False, False, False],
+       fill\_value='?',
+            dtype=object), 'param\_kernel': masked\_array(data=['poly', 'poly', 'poly', 'poly', 'poly', 'poly', 'poly',
+                   'poly', 'poly', 'poly', 'poly', 'poly', 'poly'],
+             mask=[False, False, False, False, False, False, False, False,
+                   False, False, False, False, False],
+       fill\_value='?',
+            dtype=object), 'params': [\{'degree': 0, 'kernel': 'poly'\}, \{'degree': 1, 'kernel': 'poly'\}, \{'degree': 2, 'kernel': 'poly'\}, \{'degree': 3, 'kernel': 'poly'\}, \{'degree': 4, 'kernel': 'poly'\}, \{'degree': 5, 'kernel': 'poly'\}, \{'degree': 6, 'kernel': 'poly'\}, \{'degree': 7, 'kernel': 'poly'\}, \{'degree': 8, 'kernel': 'poly'\}, \{'degree': 9, 'kernel': 'poly'\}, \{'degree': 10, 'kernel': 'poly'\}, \{'degree': 11, 'kernel': 'poly'\}, \{'degree': 12, 'kernel': 'poly'\}], 'split0\_test\_score': array([0.50819672, 0.98360656, 0.96721311, 0.96721311, 0.96721311,
+       0.96721311, 0.96721311, 0.96721311, 0.96721311, 0.96721311,
+       0.96721311, 0.98360656, 1.        ]), 'split1\_test\_score': array([0.50819672, 0.90163934, 0.8852459 , 0.8852459 , 0.8852459 ,
+       0.8852459 , 0.8852459 , 0.8852459 , 0.8852459 , 0.8852459 ,
+       0.8852459 , 0.90163934, 0.8852459 ]), 'split2\_test\_score': array([0.50819672, 0.90163934, 0.93442623, 0.86885246, 0.86885246,
+       0.85245902, 0.85245902, 0.85245902, 0.85245902, 0.85245902,
+       0.85245902, 0.83606557, 0.81967213]), 'split3\_test\_score': array([0.5       , 0.93333333, 0.91666667, 0.91666667, 0.91666667,
+       0.93333333, 0.91666667, 0.91666667, 0.91666667, 0.91666667,
+       0.91666667, 0.91666667, 0.91666667]), 'split4\_test\_score': array([0.5       , 0.93333333, 0.96666667, 0.93333333, 0.91666667,
+       0.91666667, 0.91666667, 0.9       , 0.88333333, 0.88333333,
+       0.88333333, 0.88333333, 0.9       ]), 'split5\_test\_score': array([0.5       , 0.91666667, 0.93333333, 0.91666667, 0.91666667,
+       0.91666667, 0.93333333, 0.93333333, 0.93333333, 0.93333333,
+       0.95      , 0.95      , 0.95      ]), 'split6\_test\_score': array([0.5       , 0.93333333, 0.95      , 0.93333333, 0.93333333,
+       0.93333333, 0.93333333, 0.93333333, 0.91666667, 0.93333333,
+       0.93333333, 0.93333333, 0.91666667]), 'split7\_test\_score': array([0.50847458, 0.93220339, 0.93220339, 0.88135593, 0.88135593,
+       0.88135593, 0.86440678, 0.86440678, 0.86440678, 0.86440678,
+       0.86440678, 0.86440678, 0.88135593]), 'split8\_test\_score': array([0.50847458, 0.91525424, 0.93220339, 0.91525424, 0.93220339,
+       0.93220339, 0.93220339, 0.93220339, 0.94915254, 0.94915254,
+       0.94915254, 0.94915254, 0.94915254]), 'split9\_test\_score': array([0.50847458, 0.91525424, 0.91525424, 0.89830508, 0.89830508,
+       0.89830508, 0.89830508, 0.89830508, 0.89830508, 0.89830508,
+       0.89830508, 0.89830508, 0.89830508]), 'mean\_test\_score': array([0.505     , 0.92666667, 0.93333333, 0.91166667, 0.91166667,
+       0.91166667, 0.91      , 0.90833333, 0.90666667, 0.90833333,
+       0.91      , 0.91166667, 0.91166667]), 'std\_test\_score': array([0.0040839 , 0.02255975, 0.02347277, 0.02791175, 0.02783574,
+       0.03145329, 0.03340383, 0.03344539, 0.03498045, 0.03580454,
+       0.0372867 , 0.04206528, 0.04621999]), 'rank\_test\_score': array([13,  2,  1,  3,  3,  3,  8, 10, 12, 10,  8,  3,  3], dtype=int32), 'split0\_train\_score': array([0.50463822, 0.94619666, 0.97773655, 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split1\_train\_score': array([0.50463822, 0.94990724, 0.98330241, 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split2\_train\_score': array([0.50463822, 0.95176252, 0.9851577 , 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split3\_train\_score': array([0.50555556, 0.93703704, 0.98333333, 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split4\_train\_score': array([0.50555556, 0.9462963 , 0.98888889, 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split5\_train\_score': array([0.50555556, 0.94814815, 0.98518519, 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split6\_train\_score': array([0.50555556, 0.94814815, 0.98333333, 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split7\_train\_score': array([0.50462107, 0.95009242, 0.97966728, 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split8\_train\_score': array([0.50462107, 0.93900185, 0.98336414, 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'split9\_train\_score': array([0.50462107, 0.95933457, 0.98890943, 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'mean\_train\_score': array([0.50500001, 0.94759249, 0.98388783, 1.        , 1.        ,
+       1.        , 1.        , 1.        , 1.        , 1.        ,
+       1.        , 1.        , 1.        ]), 'std\_train\_score': array([0.00045365, 0.00596939, 0.00332274, 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        ])\}
+the error rate for the degree  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] is:  [0.495, 0.07333333333333336, 0.06666666666666665, 0.08833333333333337, 0.08833333333333337, 0.08833333333333337, 0.08999999999999997, 0.09166666666666667, 0.09333333333333338, 0.09166666666666667, 0.08999999999999997, 0.08833333333333337, 0.08833333333333337]
+the best is  \{'degree': 2, 'kernel': 'poly'\}
+poly-10cv has a test error rate of  0.06499999999999995
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}(4) Run Random Forest on the training data. Keeping all other parameter at default, }
+         \PY{c+c1}{\PYZsh{}fit the model using different number of trees (10, 20, 30,……, 1000). }
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+         
+         \PY{n}{g} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{1001}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}training }
+         
+         
+         \PY{c+c1}{\PYZsh{} NOTE: Setting the `warm\PYZus{}start` construction parameter to `True` disables}
+         \PY{c+c1}{\PYZsh{} support for parallelized ensembles but is necessary for tracking the OOB}
+         \PY{c+c1}{\PYZsh{} error trajectory during training.}
+         \PY{n}{rf} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{warm\PYZus{}start}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{oob\PYZus{}score}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} to store error}
+         \PY{n}{error\PYZus{}rate} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{g}\PY{p}{:}
+             \PY{n}{rf}\PY{o}{.}\PY{n}{set\PYZus{}params}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{n}{i}\PY{p}{)}
+             \PY{n}{rf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Record the OOB error for each `n\PYZus{}estimators=i` setting.}
+             \PY{n}{oob\PYZus{}error} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{rf}\PY{o}{.}\PY{n}{oob\PYZus{}score\PYZus{}}
+             \PY{n}{error\PYZus{}rate}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{oob\PYZus{}error}\PY{p}{)}
+         
+         
+         
+         \PY{c+c1}{\PYZsh{}Plot the OOB error rate v.s. the number of trees. }
+         \PY{n}{plot} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{g}\PY{p}{,}\PY{n}{error\PYZus{}rate}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the error rate for \PYZsh{} trees }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{g}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{error\PYZus{}rate}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Select the number of trees based on when the OOB error rate first stabilizes }
+         \PY{c+c1}{\PYZsh{}(close enough to the error rate at 1000 trees, with a difference within 1\PYZpc{}).}
+         \PY{c+c1}{\PYZsh{}the error at 1000\PYZsq{}s lower and upper bounds}
+         \PY{n}{le} \PY{o}{=} \PY{n}{error\PYZus{}rate}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{g}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{l+m+mf}{1.01}
+         \PY{n}{ue}  \PY{o}{=} \PY{n}{error\PYZus{}rate}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{g}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{l+m+mf}{0.99}
+         \PY{n}{j} \PY{o}{=}\PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{error\PYZus{}rate}\PY{p}{:}
+             
+             \PY{k}{if} \PY{p}{(}\PY{n}{i}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{n}{le}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stable error is}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ for }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{g}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trees}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{k}{break}
+             \PY{n}{j}\PY{o}{=}\PY{n}{j}\PY{o}{+}\PY{l+m+mi}{1}
+         
+         
+         
+         \PY{c+c1}{\PYZsh{}Select the number of trees based on when the OOB error rate first stabilizes }
+         \PY{c+c1}{\PYZsh{} and conduct prediction on the testing data. }
+         \PY{c+c1}{\PYZsh{}train}
+         \PY{n}{rf} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{680}\PY{p}{,}\PY{n}{warm\PYZus{}start}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{oob\PYZus{}score}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{rf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}predict}
+         \PY{n}{pred} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{rf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{tX}\PY{p}{,}\PY{n}{ty}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Report testing error rate. }
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random forest has a test error rate of }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pred}\PY{p}{)}
+         \PY{n}{te}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{n}{pred}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/dist-packages/sklearn/ensemble/forest.py:458: UserWarning: Some inputs do not have OOB scores. This probably means too few trees were used to compute any reliable oob estimates.
+  warn("Some inputs do not have OOB scores. "
+/usr/local/lib/python3.6/dist-packages/sklearn/ensemble/forest.py:463: RuntimeWarning: invalid value encountered in true\_divide
+  predictions[k].sum(axis=1)[:, np.newaxis])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+the error rate for \# trees  [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600, 610, 620, 630, 640, 650, 660, 670, 680, 690, 700, 710, 720, 730, 740, 750, 760, 770, 780, 790, 800, 810, 820, 830, 840, 850, 860, 870, 880, 890, 900, 910, 920, 930, 940, 950, 960, 970, 980, 990, 1000] is:  [0.20333333333333337, 0.15000000000000002, 0.1383333333333333, 0.11166666666666669, 0.09166666666666667, 0.08833333333333337, 0.08833333333333337, 0.08333333333333337, 0.08499999999999996, 0.09166666666666667, 0.08333333333333337, 0.07166666666666666, 0.07333333333333336, 0.06833333333333336, 0.06666666666666665, 0.06499999999999995, 0.06999999999999995, 0.06666666666666665, 0.06333333333333335, 0.06333333333333335, 0.06166666666666665, 0.06333333333333335, 0.06833333333333336, 0.06499999999999995, 0.06833333333333336, 0.06833333333333336, 0.06999999999999995, 0.06666666666666665, 0.06666666666666665, 0.06833333333333336, 0.06333333333333335, 0.06000000000000005, 0.06333333333333335, 0.06333333333333335, 0.06499999999999995, 0.06666666666666665, 0.06666666666666665, 0.06499999999999995, 0.06166666666666665, 0.06333333333333335, 0.06499999999999995, 0.06499999999999995, 0.06333333333333335, 0.06333333333333335, 0.06333333333333335, 0.06666666666666665, 0.06499999999999995, 0.06666666666666665, 0.06666666666666665, 0.06666666666666665, 0.06666666666666665, 0.06666666666666665, 0.06166666666666665, 0.06333333333333335, 0.06333333333333335, 0.06666666666666665, 0.06499999999999995, 0.06499999999999995, 0.06666666666666665, 0.06833333333333336, 0.06833333333333336, 0.06333333333333335, 0.06499999999999995, 0.06333333333333335, 0.06499999999999995, 0.06499999999999995, 0.06166666666666665, 0.06499999999999995, 0.06499999999999995, 0.06499999999999995, 0.06499999999999995, 0.06166666666666665, 0.06166666666666665, 0.06166666666666665, 0.06333333333333335, 0.06333333333333335, 0.06499999999999995, 0.06333333333333335, 0.06333333333333335, 0.06333333333333335, 0.06333333333333335, 0.06333333333333335, 0.06333333333333335, 0.06666666666666665, 0.06499999999999995, 0.06166666666666665, 0.06333333333333335, 0.06333333333333335, 0.06166666666666665, 0.06000000000000005, 0.05666666666666664, 0.06000000000000005, 0.06000000000000005, 0.06333333333333335, 0.06166666666666665, 0.06000000000000005, 0.06166666666666665, 0.06166666666666665, 0.06000000000000005, 0.06000000000000005]
+stable error is 0.06000000000000005  for  320 trees
+random forest has a test error rate of  0.050000000000000044
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{}Rank the predictors based on their importance score. }
+         \PY{n}{importances} \PY{o}{=} \PY{n}{rf}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}
+         \PY{n}{indices} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{importances}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Print the feature ranking}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rank of predictors based on importance score:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{. feature }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ (}\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{f} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{indices}\PY{p}{[}\PY{n}{f}\PY{p}{]}\PY{p}{,} \PY{n}{importances}\PY{p}{[}\PY{n}{indices}\PY{p}{[}\PY{n}{f}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Rank of predictors based on importance score:
+1. feature 7 (0.297669)
+2. feature 1 (0.245494)
+3. feature 5 (0.037635)
+4. feature 21 (0.023690)
+5. feature 20 (0.022747)
+6. feature 11 (0.022371)
+7. feature 22 (0.021630)
+8. feature 10 (0.021381)
+9. feature 2 (0.020894)
+10. feature 9 (0.020565)
+11. feature 3 (0.019165)
+12. feature 8 (0.019137)
+13. feature 17 (0.019008)
+14. feature 14 (0.018808)
+15. feature 24 (0.018663)
+16. feature 15 (0.018611)
+17. feature 16 (0.018535)
+18. feature 19 (0.018336)
+19. feature 0 (0.017693)
+20. feature 23 (0.017472)
+21. feature 13 (0.017186)
+22. feature 4 (0.016689)
+23. feature 18 (0.016092)
+24. feature 6 (0.015498)
+25. feature 12 (0.015032)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{o}{!}\PY{o}{\PYZob{}}sys.executable\PY{o}{\PYZcb{}} \PYZhy{}m pip install xgboost
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Collecting xgboost
+  Using cached https://files.pythonhosted.org/packages/6a/49/7e10686647f741bd9c8918b0decdb94135b542fe372ca1100739b8529503/xgboost-0.82-py2.py3-none-manylinux1\_x86\_64.whl
+Collecting numpy (from xgboost)
+  Using cached https://files.pythonhosted.org/packages/35/d5/4f8410ac303e690144f0a0603c4b8fd3b986feb2749c435f7cdbb288f17e/numpy-1.16.2-cp36-cp36m-manylinux1\_x86\_64.whl
+Collecting scipy (from xgboost)
+  Using cached https://files.pythonhosted.org/packages/7f/5f/c48860704092933bf1c4c1574a8de1ffd16bf4fde8bab190d747598844b2/scipy-1.2.1-cp36-cp36m-manylinux1\_x86\_64.whl
+Installing collected packages: numpy, scipy, xgboost
+Successfully installed numpy-1.16.2 scipy-1.2.1 xgboost-0.82
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k+kn}{import} \PY{n+nn}{xgboost} \PY{k}{as} \PY{n+nn}{xgb}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{}(5) Run gradient boosting of trees at default setting on the training data. }
+         \PY{n}{gbt} \PY{o}{=} \PY{n}{xgb}\PY{o}{.}\PY{n}{XGBClassifier}\PY{p}{(}\PY{p}{)}
+         \PY{n}{gbt}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the gb treee is: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{gbt}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Predict the testing data. Report the testing data error rate.}
+         \PY{n}{pred} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{gbt}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{tX}\PY{p}{,}\PY{n}{ty}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Report testing error rate. }
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{the XGB gradient boosted tree has a test error rate of }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Report variable importance. }
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{with feature importance }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{gbt}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{to compare, the error for}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ln}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ are }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{te}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+the gb treee is:  XGBClassifier(base\_score=0.5, booster='gbtree', colsample\_bylevel=1,
+       colsample\_bytree=1, gamma=0, learning\_rate=0.1, max\_delta\_step=0,
+       max\_depth=3, min\_child\_weight=1, missing=None, n\_estimators=100,
+       n\_jobs=1, nthread=None, objective='binary:logistic', random\_state=0,
+       reg\_alpha=0, reg\_lambda=1, scale\_pos\_weight=1, seed=None,
+       silent=True, subsample=1)
+the XGB gradient boosted tree has a test error rate of  0.05500000000000005 
+
+with feature importance  [0.01786581 0.24626149 0.02424451 0.03576612 0.01582746 0.05910151
+ 0.01855204 0.24128076 0.02423516 0.0006017  0.02172776 0.02791414
+ 0.03062525 0.01270761 0.01083593 0.02823354 0.01190676 0.02502947
+ 0.00667074 0.02407626 0.01209118 0.02648786 0.03783779 0.01901644
+ 0.02110271]
+
+to compare, the error for ['radial', 'sigmoid', 'polynomial', 'rand forest']  are  [0.07999999999999996, 0.385, 0.06499999999999995, 0.050000000000000044]
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
