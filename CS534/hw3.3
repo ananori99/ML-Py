@@ -1,0 +1,12 @@
+
+Lambda = logspace(-7,-0,40);
+
+
+Mdl = fitclinear(loandefault1,loandefault1y, 'Learner','logistic','Regularization','ridge',...
+    'Lambda',Lambda)
+
+        [~, predictT] = predict(Mdl, loandefaultTestCopy);
+        [~,~,~,AUC] = perfcurve(table2array(loandefault2),predictT(:,1),0); 
+        
+
+imagesc(AUC)
